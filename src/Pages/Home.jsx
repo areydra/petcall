@@ -17,35 +17,13 @@ class Home extends Component {
     page: 1,
     onLoading: false,
     typeAnimals: [],
+    filter: false,
     err: ""
   };
 
   componentDidMount = async () => {
     this.props.match.params.name ? await this.getPetName() : await this.getPet();
-    await this.getTypeAnimals()
-    client.animalData
-      .breeds()
-      .then(res => {
-        console.log('breed', res)
-        // this.setState({ typeAnimals: res.data.types });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ err });
-      });
   };
-
-  getTypeAnimals = () => {
-    client.animalData
-      .types()
-      .then(res => {
-        this.setState({ typeAnimals: res.data.types });
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ err });
-      });
-  }
 
   getPet = currentPage => {
     client.animal
@@ -86,9 +64,30 @@ class Home extends Component {
   morePages = () => {
     const nextPage = this.state.page + 1;
     this.setState({ onLoading: true, page: nextPage });
-    this.props.match.params.name ? this.getPetName(nextPage) : this.getPet(nextPage);
+    if(this.props.match.params.name){
+      this.getPetName(nextPage)
+    }else if(this.state.filter){
+      this.handleFilter({...this.state.filter, page: nextPage})
+    }else{
+      this.getPet(nextPage)
+    }
   };
 
+  handleFilter = filter => {
+    client.animal.search(filter).then(res => {
+      let animals = [];
+      filter.page > 9
+        ? (animals = [...this.state.animals, ...res.data.animals])
+        : (animals = res.data.animals);
+      this.setState({ animals, onLoading: false, filter:filter });
+    })
+  }
+
+  handleClearFilter = () => {
+    this.setState({ animals: [], filter: false })
+    this.getPet()
+  }
+  
   render() {
     return (
       <BottomScrollListener onBottom={this.morePages}>
@@ -97,7 +96,7 @@ class Home extends Component {
           className="row content container-fluid"
           style={{ margin: "0px !important" }}
         >
-          <Search onHandleSearch={this.handleSearch} typeAnimals={this.state.typeAnimals} />
+          <Search onHandleSearch={this.handleSearch} client={client} onHandleFilter={this.handleFilter} onHandleClear={this.handleClearFilter} />
           <div className="col-xl-9 col-lg-9 col-md-12 col-sm-12">
             {this.props.match.params.name ? (
               <p style={{ marginTop: 8 }} className="text-center">
