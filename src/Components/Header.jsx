@@ -248,7 +248,7 @@ const Header = props => {
                     <span style={{ marginLeft: 15, cursor: 'pointer', color: 'red' }} onClick={() => handleDeleteWishlist(animal.animal.id)}>Delete</span>
                   </ListGroupItem>
                 ))
-              : null
+              : <p>Empty..</p>
             }
           </ListGroup>
         </ModalBody>

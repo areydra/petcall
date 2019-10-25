@@ -106,24 +106,26 @@ const Card = props => {
   const handleWishlist = async() => {
     setWishlist(!wishlist)
     const user = firebase.auth().currentUser
-    console.log(wishlist)
     if(wishlist){
-      firebase.firestore().collection('favorites').doc(animal.id.toString()).set({
+      setWishlistIcon(require('../Assets/Icons/liked.png'))
+      await firebase.firestore().collection('favorites').doc(animal.id.toString()).set({
         uid: user.uid,
         name: user.displayName,
         animal: animal
       }).then(async() => {
         props.animalsData.push({ uid: user.uid, name: user.displayName, animal: animal })
+      }).catch(() => {
+        setWishlistIcon(require('../Assets/Icons/like.png'))
       })
-      setWishlistIcon(require('../Assets/Icons/liked.png'))
     }else{
       let checkData = props.animalsData.filter(animalDat => animalDat.animal.id == animal.id)
       if(checkData.length){
-        firebase.firestore().collection('favorites').doc(animal.id.toString()).delete().then(async () => {
+        await firebase.firestore().collection('favorites').doc(animal.id.toString()).delete().then(async () => {
           await _.remove(props.animalsData, animalDat => animalDat.animal.id == animal.id)
+        }).catch(() => {
+          setWishlistIcon(require('../Assets/Icons/liked.png'))
         })
       }
-      setWishlistIcon(require('../Assets/Icons/like.png'))
     }
   }
 
