@@ -139,7 +139,11 @@ const Card = props => {
             {animal.name}
           </h3>
           <p className="modal-title w-10" style={{ color: "#3C9D9B", cursor: 'pointer' }}>
-            <img src={wishlistIcon} alt="wishlists" width="25" height="25" onClick={handleWishlist} />
+            {
+              (firebase.auth().currentUser) ? 
+                <img src={wishlistIcon} alt="wishlists" width="25" height="25" onClick={handleWishlist} />
+              :null
+            }
           </p>
         </div>
         <ModalBody>
