@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {connect} from 'react-redux'
 import {
   Button,
@@ -26,10 +26,10 @@ const Card = props => {
   const [closeAll, setCloseAll] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const [name, setName] = useState(localStorage.get('user') ? localStorage.get('user').name : null);
-  const [email, setEmail] = useState(localStorage.get('user') ? localStorage.get('user').email : null);
-  const [phone, setPhone] = useState(localStorage.get('user') ? localStorage.get('user').phone : null);
-  const [addressAdoption, setAddressAdoption] = useState(localStorage.get('user') ? localStorage.get('user').address : null);
+  const [name, setName] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [addressAdoption, setAddressAdoption] = useState(null);
   const [errorName, setErrorName] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPhone, setErrorPhone] = useState(false);
@@ -63,13 +63,19 @@ const Card = props => {
   // Modal
   const toggle = async () => {
     await props.animalsData.map(animalDat => {
-      (animalDat.animal.id === animal.id) ? setWishlistIcon(require('../Assets/Icons/liked.png')) : setWishlistIcon(require('../Assets/Icons/like.png'))
+      (animalDat.animal.id == animal.id) ? setWishlistIcon(require('../Assets/Icons/liked.png')) : setWishlistIcon(require('../Assets/Icons/like.png'))
     })
     setModal(!modal)
   }
+
   const toggleNested = () => {
     if(localStorage.get('user')){
+      let userData = localStorage.get('user')
       setNestedModal(!nestedModal);
+      setName(userData.name)
+      setPhone(userData.phone)
+      setAddressAdoption(userData.address)
+      setEmail(userData.email)
       setErrorAddressAdoption(false);
       setErrorEmail(false);
       setErrorName(false);

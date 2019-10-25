@@ -288,11 +288,27 @@ const Header = props => {
       await firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(result => {
+        .then(async result => {
           result.user.updateProfile({ displayName: name })
           addUserDetails(result.user.uid)
+
+          firebase.firestore().collection('userDetails').where("uid", "==", result.user.uid).get().then(function (querySnapshot) {
+            querySnapshot.forEach(async doc => {
+              let data = doc.data()
+              let dataUser = {
+                uid: result.user.uid,
+                name: result.user.displayName,
+                email: result.user.email,
+                phone: data.phone,
+                address: data.address
+              }
+              await localStorage.set('user', dataUser)
+              setUser(dataUser)
+            });
+          })
         })
         .catch(err => {
+          console.log(err)
           setErrorRegister(err);
           setSendingForm(false);
         });

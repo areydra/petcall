@@ -73,6 +73,7 @@ class Home extends Component {
   };
 
   handleFilter = filter => {
+    this.setState({ animals: [] })
     client.animal.search(filter).then(res => {
       let animals = [];
       filter.page > 9
