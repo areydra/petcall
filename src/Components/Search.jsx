@@ -47,14 +47,14 @@ const Search = props => {
 
   const getSelectedPet = async() => {
     if(selectedPet){
-      console.log(selectedPet.toString())
+      // console.log(selectedPet.toString())
       await client.animalData
         .type(selectedPet.toString())
         .then(res => {
-          console.log('res',res)
-          // setCoats(res.data.type.coats);
-          // setColors(res.data.type.colors);
-          // setGenders(res.data.type.genders);
+          // console.log('res',res)
+          setCoats(res.data.type.coats);
+          setColors(res.data.type.colors);
+          setGenders(res.data.type.genders);
         })
     }
   }
