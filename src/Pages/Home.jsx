@@ -4,7 +4,6 @@ import Header from "../Components/Header";
 import Search from "../Components/Search";
 import { Client } from "@petfinder/petfinder-js";
 import BottomScrollListener from "react-bottom-scroll-listener";
-import _ from "lodash";
 
 const client = new Client({
   apiKey: "2Y9UArwgWV579LoxM4RRgos9UvKMvBM8O6BTD0U7hgrXDPHjSv",
@@ -109,39 +108,33 @@ class Home extends Component {
                 flexDirection: "row",
                 flexWrap: "wrap",
                 justifyContent: "center",
+
                 paddingBottom: 40
               }}
             >
               {!this.state.animals.length ? (
                 <div
-                  class="spinner-border text-primary"
+                  className="spinner-border text-primary"
                   role="status"
                   style={{ color: "#3C9D9B !important", marginTop: 20 }}
                 >
-                  <span class="sr-only">Loading...</span>
+                  <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 this.state.animals.map(animal => (
                   <Card
-                    name={animal.name}
-                    gender={animal.gender}
-                    image={
-                      animal.photos.length
-                        ? animal.photos[0].large
-                        : "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png"
-                    }
-                    description={animal.description}
+                    animal={animal}
                   />
                 ))
               )}
               {this.state.onLoading ? (
                 <div style={{ width: "100%", textAlign: "center" }}>
                   <div
-                    class="spinner-border text-primary"
+                    className="spinner-border text-primary"
                     role="status"
                     style={{ color: "#3C9D9B !important" }}
                   >
-                    <span class="sr-only">Loading...</span>
+                    <span className="sr-only">Loading...</span>
                   </div>
                 </div>
               ) : null}

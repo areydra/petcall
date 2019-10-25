@@ -36,9 +36,6 @@ const Search = props => {
         setColors(res.data.type.colors);
         setGenders(res.data.type.genders);
       })
-      .catch(err => {
-        console.log(err);
-      });
   }, [selectedPet]);
 
   const handleSelectedPet = event => {
@@ -61,11 +58,11 @@ const Search = props => {
     <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12">
       <div className="row" style={{ marginLeft: 10, marginTop: 10 }}>
         <div className="col-12">
-          <div class="input-group mb-5">
+          <div className="input-group mb-5">
             <input
               type="text"
               className="form-control"
-              plPetaceholder="Search pet here.."
+              placeholder="Search pet here.."
               onChange={event => setText(event.target.value)}
               onKeyUp={event =>
                 event.keyCode === 13
@@ -74,12 +71,12 @@ const Search = props => {
               }
             />
             <div
-              class="input-group-append"
+              className="input-group-append"
               style={{ cursor: "pointer" }}
               onClick={() => props.onHandleSearch(text)}
             >
               <span
-                class="input-group-text"
+                className="input-group-text"
                 style={{
                   backgroundColor: "#3C9D9B",
                   color: "white",
@@ -97,10 +94,10 @@ const Search = props => {
             <h3>Filter</h3>
           </div>
           <div className="mb-3">
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Pet Type</label>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlSelect1">Pet Type</label>
               <select
-                class="form-control"
+                className="form-control"
                 id="exampleFormControlSelect1"
                 onChange={handleSelectedPet}
               >
@@ -109,7 +106,7 @@ const Search = props => {
                 </option>
                 {petTypes.length
                   ? petTypes.map(type => (
-                      <option value={type.name}>{type.name}</option>
+                      <option value={type.name} key={type.name}>{type.name}</option>
                     ))
                   : null}
               </select>
@@ -118,10 +115,10 @@ const Search = props => {
           {selectedPet ? (
             <div>
               <div className="mb-3">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Coats</label>
+                <div className="form-group">
+                  <label htmlFor="exampleFormControlSelect1">Coats</label>
                   <select
-                    class="form-control"
+                    className="form-control"
                     id="exampleFormControlSelect1"
                     onChange={handleSelectedCoat}
                   >
@@ -129,16 +126,16 @@ const Search = props => {
                       Choose coats
                     </option>
                     {coats.length
-                      ? coats.map(coat => <option value={coat}>{coat}</option>)
+                      ? coats.map(coat => <option value={coat} key={coat}>{coat}</option>)
                       : null}
                   </select>
                 </div>
               </div>
               <div className="mb-3">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Colors</label>
+                <div className="form-group">
+                  <label htmlFor="exampleFormControlSelect1">Colors</label>
                   <select
-                    class="form-control"
+                    className="form-control"
                     id="exampleFormControlSelect1"
                     onChange={handleSelectedColor}
                   >
@@ -147,17 +144,17 @@ const Search = props => {
                     </option>
                     {colors.length
                       ? colors.map(color => (
-                          <option value={color}>{color}</option>
+                          <option value={color} key={color}>{color}</option>
                         ))
                       : null}
                   </select>
                 </div>
               </div>
               <div className="mb-3">
-                <div class="form-group">
-                  <label for="exampleFormControlSelect1">Genders</label>
+                <div className="form-group">
+                  <label htmlFor="exampleFormControlSelect1">Genders</label>
                   <select
-                    class="form-control"
+                    className="form-control"
                     id="exampleFormControlSelect1"
                     onChange={handleSelectedGender}
                   >
@@ -166,7 +163,7 @@ const Search = props => {
                     </option>
                     {genders.length
                       ? genders.map(gender => (
-                          <option value={gender}>{gender}</option>
+                          <option value={gender} key={gender}>{gender}</option>
                         ))
                       : null}
                   </select>
