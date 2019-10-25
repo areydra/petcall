@@ -47,8 +47,9 @@ const Search = props => {
 
   const getSelectedPet = async() => {
     if(selectedPet){
+      console.log(selectedPet.toString())
       await client.animalData
-        .type(selectedPet)
+        .type(selectedPet.toString())
         .then(res => {
           console.log('res',res)
           // setCoats(res.data.type.coats);
