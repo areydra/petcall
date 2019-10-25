@@ -207,10 +207,12 @@ const Header = props => {
   const getAnimalsWishlist = async() => {
     let useruid = localStorage.get('user')
     let animalswish = []
-    await firebase.firestore().collection('favorites').where('uid', '==', useruid.uid).get().then(querySnapshot => {
-      querySnapshot.docs.map(data => animalswish.push(data.data()))
-    })
-    props.animalsData.push(...animalswish)
+    if(useruid){
+      await firebase.firestore().collection('favorites').where('uid', '==', useruid.uid).get().then(querySnapshot => {
+        querySnapshot.docs.map(data => animalswish.push(data.data()))
+      })
+      props.animalsData.push(...animalswish)
+    }
   }
 
   const handleDeleteWishlist = (id) => {
