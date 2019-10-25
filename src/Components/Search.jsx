@@ -17,8 +17,8 @@ const Search = props => {
     getPet()
   }, []);
 
-  const getPet = () => {
-    client.animalData
+  const getPet = async() => {
+    await client.animalData
       .types()
       .then(res => {
         setPetTypes(res.data.types);
@@ -29,14 +29,20 @@ const Search = props => {
   };
 
   useEffect(() => {
-    client.animalData
-      .type(selectedPet)
-      .then(res => {
-        setCoats(res.data.type.coats);
-        setColors(res.data.type.colors);
-        setGenders(res.data.type.genders);
-      })
+    getSelectedPet()
   }, [selectedPet]);
+
+  const getSelectedPet = async() => {
+    if(selectedPet){
+      await client.animalData
+        .type(selectedPet)
+        .then(res => {
+          setCoats(res.data.type.coats);
+          setColors(res.data.type.colors);
+          setGenders(res.data.type.genders);
+        })
+    }
+  }
 
   const handleSelectedPet = event => {
     setSelectedPet(event.target.value);
