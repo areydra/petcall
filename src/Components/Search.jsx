@@ -16,16 +16,29 @@ const Search = props => {
   useEffect(() => {
     getPet()
   }, []);
-
+  
   const getPet = async() => {
-    await client.animalData
-      .types()
-      .then(res => {
-        setPetTypes(res.data.types);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    setPetTypes([])
+    setTimeout(() => {
+      setPetTypes([
+        { name: "Dog" },
+        { name: "Cat" },
+        { name: "Rabbit" },
+        { name: "Small & Furry" },
+        { name: "Horse" },
+        { name: "Bird" },
+        { name: "Scales, Fins & Other" },
+        { name: "Barnyard" }
+      ])
+    }, 1000)
+    // await client.animalData
+    //   .types()
+    //   .then(res => {
+    //     setPetTypes(res.data.types);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   useEffect(() => {
