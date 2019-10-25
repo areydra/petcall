@@ -66,6 +66,7 @@ const Card = props => {
       (animalDat.animal.id == animal.id) ? setWishlistIcon(require('../Assets/Icons/liked.png')) : setWishlistIcon(require('../Assets/Icons/like.png'))
     })
     setModal(!modal)
+    console.log(props.animalsData)
   }
 
   const toggleNested = () => {
@@ -155,7 +156,7 @@ const Card = props => {
           </p>
         </div>
         <ModalBody>
-          <div style={{ width: "100%", marginBottom: 25 }}>
+          <div style={{ width: "100%", marginBottom: 25, height: 350 }}>
             <div style={{ margin: "0 auto", width: "50%" }}>
               <Carousel
                 activeIndex={activeIndex}
@@ -208,11 +209,11 @@ const Card = props => {
           </div>
           <hr />
           <div className="d-flex justify-content-between">
-            <p>Age: {animal.age}</p>
-            <p>Breeds: {animal.breeds.primary}</p>
-            <p>Gender: {animal.gender}</p>
-            <p>Size: {animal.size}</p>
-            <p>Species: {animal.species}</p>
+            <p style={{ color: '#3C9D9B' }}>Age: <span style={{ color: 'black', fontSize: 13 }}>{animal.age}</span></p>
+            <p style={{ color: '#3C9D9B' }}>Breeds: <span style={{ color: 'black', fontSize: 13 }}>{animal.breeds.primary}</span></p>
+            <p style={{ color: '#3C9D9B' }}>Gender: <span style={{ color: 'black', fontSize: 13 }}>{animal.gender}</span></p>
+            <p style={{ color: '#3C9D9B' }}>Size: <span style={{ color: 'black', fontSize: 13 }}>{animal.size}</span></p>
+            <p style={{ color: '#3C9D9B' }}>Species: <span style={{ color: 'black', fontSize: 13 }}>{animal.species}</span></p>
           </div>
           {showModalFormAdoption()}
         </ModalBody>

@@ -18,27 +18,14 @@ const Search = props => {
   }, []);
   
   const getPet = async() => {
-    setPetTypes([])
-    setTimeout(() => {
-      setPetTypes([
-        { name: "Dog" },
-        { name: "Cat" },
-        { name: "Rabbit" },
-        { name: "Small & Furry" },
-        { name: "Horse" },
-        { name: "Bird" },
-        { name: "Scales, Fins & Other" },
-        { name: "Barnyard" }
-      ])
-    }, 1000)
-    // await client.animalData
-    //   .types()
-    //   .then(res => {
-    //     setPetTypes(res.data.types);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
+    await client.animalData
+      .types()
+      .then(res => {
+        setPetTypes(res.data.types);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -47,11 +34,9 @@ const Search = props => {
 
   const getSelectedPet = async() => {
     if(selectedPet){
-      // console.log(selectedPet.toString())
       await client.animalData
         .type(selectedPet.toString())
         .then(res => {
-          // console.log('res',res)
           setCoats(res.data.type.coats);
           setColors(res.data.type.colors);
           setGenders(res.data.type.genders);

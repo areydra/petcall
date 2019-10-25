@@ -18,7 +18,8 @@ class Home extends Component {
     typeAnimals: [],
     filter: false,
     err: ""
-  };
+  };          // console.log('res',res)
+
 
   componentDidMount = async () => {
     this.props.match.params.name ? await this.getPetName() : await this.getPet();
@@ -33,7 +34,8 @@ class Home extends Component {
           ? (animals = [...this.state.animals, ...res.data.animals])
           : (animals = res.data.animals);
         this.setState({ animals, onLoading: false });
-      })
+      })          // console.log('res',res)
+
       .catch(err => {
         console.log(err);
         this.setState({ err });
@@ -41,8 +43,9 @@ class Home extends Component {
   };
 
   getPetName = currentPage => {
+    let search = (this.state.filter) ? { ...this.state.filter, name: this.props.match.params.name } : { name: this.props.match.params.name, limit: 9, page: currentPage ? currentPage : this.state.page }
     client.animal
-      .search({ name: this.props.match.params.name, limit: 9, page: currentPage ? currentPage : this.state.page })
+      .search(search)
       .then(res => {
         let animals = [];
         currentPage
@@ -66,21 +69,36 @@ class Home extends Component {
     if(this.props.match.params.name){
       this.getPetName(nextPage)
     }else if(this.state.filter){
-      this.handleFilter({...this.state.filter, page: nextPage})
+      this.morePageFilter({...this.state.filter, page: nextPage})
     }else{
       this.getPet(nextPage)
     }
   };
 
-  handleFilter = filter => {
-    this.setState({ animals: [] })
+  morePageFilter = async filter => {
     client.animal.search(filter).then(res => {
       let animals = [];
-      filter.page > 9
+      filter.page
         ? (animals = [...this.state.animals, ...res.data.animals])
         : (animals = res.data.animals);
-      this.setState({ animals, onLoading: false, filter:filter });
-    })
+      this.setState({ animals, onLoading: false, filter: filter });
+    })    
+  }
+
+  handleFilter = async filter => {
+    if (!this.props.match.params.name){
+      this.setState({ animals: [] })
+      client.animal.search(filter).then(res => {
+        let animals = [];
+        filter.page
+          ? (animals = [...this.state.animals, ...res.data.animals])
+          : (animals = res.data.animals);
+        this.setState({ animals, onLoading: false, filter:filter });
+      })
+    }else{
+      await this.setState({ animals: [], filter })
+      this.getPetName()
+    }
   }
 
   handleClearFilter = () => {
