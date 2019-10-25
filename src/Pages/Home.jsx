@@ -43,7 +43,7 @@ class Home extends Component {
   };
 
   getPetName = currentPage => {
-    let search = (this.state.filter) ? { ...this.state.filter, name: this.props.match.params.name } : { name: this.props.match.params.name, limit: 9, page: currentPage ? currentPage : this.state.page }
+    let search = (this.state.filter) ? { ...this.state.filter, name: this.props.match.params.name, page: currentPage } : { name: this.props.match.params.name, limit: 9, page: currentPage ? currentPage : this.state.page }
     client.animal
       .search(search)
       .then(res => {
