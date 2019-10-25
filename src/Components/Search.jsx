@@ -50,9 +50,10 @@ const Search = props => {
       await client.animalData
         .type(selectedPet)
         .then(res => {
-          setCoats(res.data.type.coats);
-          setColors(res.data.type.colors);
-          setGenders(res.data.type.genders);
+          console.log('res',res)
+          // setCoats(res.data.type.coats);
+          // setColors(res.data.type.colors);
+          // setGenders(res.data.type.genders);
         })
     }
   }
