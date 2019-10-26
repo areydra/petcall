@@ -103,7 +103,7 @@ const Card = props => {
           <img
             src={photo.full}
             alt="carousel"
-            style={{ width: "100%", height: 350 }}
+            style={{ width: 383, height: 350 }}
           />
         </div>
       </CarouselItem>

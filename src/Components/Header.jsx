@@ -364,7 +364,8 @@ const Header = props => {
         })
       })
       .catch(err => {
-        setErrorSignIn(err);
+        setSendingForm(false)
+        setErrorSignIn(err.message);
       });
   };
 
@@ -421,6 +422,18 @@ const Header = props => {
                 </Button>
               </div>
             </div>
+            {
+              errorSignIn ?
+                <div className="row">
+                  <div className="col-4"></div>
+                  <div className="col-8" style={{ paddingLeft: 5 }}>
+                    <p style={{ marginBottom: 0, color: "red" }}>
+                      {errorSignIn}
+                    </p>
+                  </div>
+                </div>
+              : null
+            }
             <div className="row">
               <div className="col-4"></div>
               <p style={{ marginLeft: 5, marginBottom: 0, color: "white" }}>
@@ -453,13 +466,6 @@ const Header = props => {
                   </DropdownItem>
                 </DropdownMenu>
               </ButtonDropdown>
-              {/* <div className="row">
-                <p style={{ color: "white" }}>Hello, {user.name}</p>
-                <Button color="danger" onClick={handleSignout}>
-                  Logout{" "}
-                  {sendingForm ? <Spinner color="light" size="sm" /> : null}
-                </Button>
-              </div> */}
             </React.Fragment>
           )}
       </span>

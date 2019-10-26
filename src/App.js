@@ -5,18 +5,12 @@ import Home from './Pages/Home'
 import { Provider } from 'react-redux'
 
 import store from "./Redux/store";
+import { apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId } from "./key"
 
-var firebaseConfig = {
-  apiKey: "AIzaSyDZ7qrf-R4CQLpm15CR-79yHZ8pxs-sqdg",
-  authDomain: "petcall-97d9d.firebaseapp.com",
-  databaseURL: "https://petcall-97d9d.firebaseio.com",
-  projectId: "petcall-97d9d",
-  storageBucket: "petcall-97d9d.appspot.com",
-  messagingSenderId: "529810585741",
-  appId: "1:529810585741:web:2dc068d1d564a4dd168ac4"
-};
+const firebaseConfig = { apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId, appId };
+
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+(!firebase.apps.length) ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
 function App() {
   return (
