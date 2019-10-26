@@ -243,9 +243,15 @@ const Header = props => {
               (animalsWishlist.length) ?
                 animalsWishlist.map(animal => (
                   <ListGroupItem>
-                    <img src={animal.animal.photos.length ? animal.animal.photos[0].small : null} alt="s" style={{ width: 50, height: 50, marginRight: 15 }} />
-                    {animal.animal.name}
-                    <span style={{ marginLeft: 15, cursor: 'pointer', color: 'red' }} onClick={() => handleDeleteWishlist(animal.animal.id)}>Delete</span>
+                    <div className="row">
+                      <div className="col-9">
+                        <img src={animal.animal.photos.length ? animal.animal.photos[0].small : "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png"} alt="s" style={{ width: 50, height: 50, marginRight: 15 }} />
+                        {animal.animal.name}
+                      </div>
+                      <div className="col-3">
+                        <span style={{ marginLeft: 15, cursor: 'pointer', color: 'red' }} onClick={() => handleDeleteWishlist(animal.animal.id)}>Delete</span>
+                      </div>
+                    </div>
                   </ListGroupItem>
                 ))
               : <p>Empty..</p>

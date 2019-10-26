@@ -19,7 +19,7 @@ import _ from 'lodash'
 
 const Card = props => {
   const animal = props.animal;
-  const [wishlistIcon, setWishlistIcon] = useState(require('../Assets/Icons/like.png'))
+  const [wishlistIcon, setWishlistIcon] = useState(false)
   const [wishlist, setWishlist] = useState(false)
   const [modal, setModal] = useState(false);
   const [nestedModal, setNestedModal] = useState(false);
@@ -62,11 +62,11 @@ const Card = props => {
 
   // Modal
   const toggle = async () => {
-    await props.animalsData.map(animalDat => {
-      (animalDat.animal.id == animal.id) ? setWishlistIcon(require('../Assets/Icons/liked.png')) : setWishlistIcon(require('../Assets/Icons/like.png'))
-    })
+    let checkWishlist = await props.animalsData.filter(animalDat => animalDat.animal.id === animal.id);  
+    if(!modal){
+      (checkWishlist.length) ? setWishlistIcon(require('../Assets/Icons/liked.png')) : setWishlistIcon(require('../Assets/Icons/like.png'))
+    }
     setModal(!modal)
-    console.log(props.animalsData)
   }
 
   const toggleNested = () => {
@@ -125,6 +125,7 @@ const Card = props => {
         setWishlistIcon(require('../Assets/Icons/like.png'))
       })
     }else{
+      setWishlistIcon(require('../Assets/Icons/like.png'))
       let checkData = props.animalsData.filter(animalDat => animalDat.animal.id == animal.id)
       if(checkData.length){
         await firebase.firestore().collection('favorites').doc(animal.id.toString()).delete().then(async () => {

@@ -18,7 +18,7 @@ class Home extends Component {
     typeAnimals: [],
     filter: false,
     err: ""
-  };          // console.log('res',res)
+  };         
 
 
   componentDidMount = async () => {
@@ -34,7 +34,7 @@ class Home extends Component {
           ? (animals = [...this.state.animals, ...res.data.animals])
           : (animals = res.data.animals);
         this.setState({ animals, onLoading: false });
-      })          // console.log('res',res)
+      })         
 
       .catch(err => {
         console.log(err);
