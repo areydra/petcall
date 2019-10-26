@@ -1,0 +1,7 @@
+export const apiKey = "AIzaSyDZ7qrf-R4CQLpm15CR-79yHZ8pxs-sqdg"
+export const authDomain = "petcall-97d9d.firebaseapp.com"
+export const databaseURL = "https://petcall-97d9d.firebaseio.com"
+export const projectId = "petcall-97d9d"
+export const storageBucket = "petcall-97d9d.appspot.com"
+export const messagingSenderId = "529810585741"
+export const appId = "1:529810585741:web:2dc068d1d564a4dd168ac4"
