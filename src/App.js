@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import * as firebase from 'firebase'
+import firebase from 'firebase/app'
 import Home from './Pages/Home'
 import { Provider } from 'react-redux'
 

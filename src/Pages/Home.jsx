@@ -141,9 +141,11 @@ class Home extends Component {
                 </div>
               ) : (
                 this.state.animals.map(animal => (
-                  <Card
-                    animal={animal}
-                  />
+                  <React.Fragment key={animal.id}>
+                    <Card
+                      animal={animal}
+                    />
+                  </React.Fragment>
                 ))
               )}
               {this.state.onLoading ? (

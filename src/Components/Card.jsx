@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import {connect} from 'react-redux'
 import {
   Button,
@@ -126,10 +126,10 @@ const Card = props => {
       })
     }else{
       setWishlistIcon(require('../Assets/Icons/like.png'))
-      let checkData = props.animalsData.filter(animalDat => animalDat.animal.id == animal.id)
+      let checkData = props.animalsData.filter(animalDat => animalDat.animal.id === animal.id)
       if(checkData.length){
         await firebase.firestore().collection('favorites').doc(animal.id.toString()).delete().then(async () => {
-          await _.remove(props.animalsData, animalDat => animalDat.animal.id == animal.id)
+          await _.remove(props.animalsData, animalDat => animalDat.animal.id === animal.id)
         }).catch(() => {
           setWishlistIcon(require('../Assets/Icons/liked.png'))
         })
@@ -414,17 +414,13 @@ const Card = props => {
               paddingBottom: "0px"
             }}
           >
-            <p
-              style={{
-                fontSize: 20,
-                fontWeight: "bold",
-                color: "white",
-                marginBottom: 0,
-                textAlign: "center"
-              }}
-            >
-              <div dangerouslySetInnerHTML={{ __html: animal.name }} />
-            </p>
+            <div style={{
+              fontSize: 20,
+              fontWeight: "bold",
+              color: "white",
+              marginBottom: 0,
+              textAlign: "center"
+            }} dangerouslySetInnerHTML={{ __html: animal.name }} />
           </div>
         </div>
         {showModalDetails()}

@@ -218,7 +218,7 @@ const Header = props => {
   const handleDeleteWishlist = (id) => {
     firebase.firestore().collection('favorites').doc(id.toString()).delete().then(async() => {
       let deletedAnimals = animalsWishlist.filter(animal => animal.animal.id !== id)
-      await _.remove(props.animalsData, animalDat => animalDat.animal.id == id)
+      await _.remove(props.animalsData, animalDat => animalDat.animal.id === id)
       await setAnimalsWishlist(deletedAnimals)
       Swal.fire(
         'Delete Successfuly',
@@ -242,17 +242,19 @@ const Header = props => {
             { 
               (animalsWishlist.length) ?
                 animalsWishlist.map(animal => (
-                  <ListGroupItem>
-                    <div className="row">
-                      <div className="col-9">
-                        <img src={animal.animal.photos.length ? animal.animal.photos[0].small : "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png"} alt="s" style={{ width: 50, height: 50, marginRight: 15 }} />
-                        {animal.animal.name}
+                  <React.Fragment key={animal.id}>
+                    <ListGroupItem>
+                      <div className="row">
+                        <div className="col-9">
+                          <img src={animal.animal.photos.length ? animal.animal.photos[0].small : "http://saveabandonedbabies.org/wp-content/uploads/2015/08/default.png"} alt="s" style={{ width: 50, height: 50, marginRight: 15 }} />
+                          {animal.animal.name}
+                        </div>
+                        <div className="col-3">
+                          <span style={{ marginLeft: 15, cursor: 'pointer', color: 'red' }} onClick={() => handleDeleteWishlist(animal.animal.id)}>Delete</span>
+                        </div>
                       </div>
-                      <div className="col-3">
-                        <span style={{ marginLeft: 15, cursor: 'pointer', color: 'red' }} onClick={() => handleDeleteWishlist(animal.animal.id)}>Delete</span>
-                      </div>
-                    </div>
-                  </ListGroupItem>
+                    </ListGroupItem>
+                  </React.Fragment>
                 ))
               : <p>Empty..</p>
             }
