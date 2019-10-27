@@ -7,8 +7,8 @@
 - [Features](#features)
 - [Requirements](#requirements)
 - [Usage](#usage-for-development)
-- [Screenshots](#screenshots))
-- [Screenshots](#web-link))
+- [Screenshots](#screenshots)
+- [Web Link](#web-link)
 
 
 ## Introduction
