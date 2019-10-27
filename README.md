@@ -1,13 +1,6 @@
 <h1 align='center'>Petcall</h1><br/><br /><br />
 <br/><br /><br />
 
-<a href="#">
-  <img src="https://img.shields.io/badge/React%20Native-0.60-blue.svg?style=flat-square" alt="npm version">
-</a>
-<a href="#">
-  <img src="https://img.shields.io/badge/Firebase-7.2.0-yellow.svg?style=flat-square" alt="npm version">
-</a>
-
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -56,6 +49,6 @@ Petcall is a website search pet for adoption
   </p>
   
 ## Web link
-<a href="petcall.herokuapp.com">
+<a href="http://petcall.herokuapp.com/">
   Petcall
 </a>
