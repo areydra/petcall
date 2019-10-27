@@ -1,4 +1,4 @@
-<h1 align='center'>Petcall</h1><br/><br /><br />
+<h1 align='center'>Petcall</h1><br/>
 
 ## Table of Contents
 
