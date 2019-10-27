@@ -1,5 +1,4 @@
 <h1 align='center'>Petcall</h1><br/><br /><br />
-<br/><br /><br />
 
 ## Table of Contents
 
